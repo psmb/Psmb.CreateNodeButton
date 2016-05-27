@@ -1,0 +1,19 @@
+{
+    "description": "Create the nodes in Neos even without the tree...",
+    "type": "neos-package",
+    "name": "psmb/createnodebutton",
+    "require": {
+        "typo3/flow": "*"
+    },
+    "license": "GPL-3.0+",
+    "autoload": {
+        "psr-0": {
+            "Psmb\\CreateNodeButton": "Classes/"
+        }
+    },
+    "extra": {
+        "neos": {
+            "package-key": "Psmb.CreateNodeButton"
+        }
+    }
+}

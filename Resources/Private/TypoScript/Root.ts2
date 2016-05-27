@@ -1,0 +1,10 @@
+prototype(Psmb.CreateNodeButton:CreateNodeButton) < prototype(TYPO3.TypoScript:Template) {
+	templatePath = 'resource://Psmb.CreateNodeButton/Private/Templates/CreateNodeButton.html'
+	attributes = TYPO3.TypoScript:Attributes {
+		class = 'CreateNodeButton'
+	}
+	referenceNode = ${node}
+	position = 'after'
+	type = 'TYPO3.Neos:Page'
+	@if.onlyInBackend = ${node.context.inBackend}
+}

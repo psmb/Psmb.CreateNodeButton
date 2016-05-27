@@ -1,0 +1,9 @@
+TYPO3:
+  Neos:
+    typoScript:
+      autoInclude:
+        'Psmb.CreateNodeButton': TRUE
+    userInterface:
+      translation:
+        autoInclude:
+          'Psmb.CreateNodeButton': ['NodeTypes/*']

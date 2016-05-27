@@ -1,0 +1,35 @@
+<div{attributes -> f:format.raw()}>
+  <f:form id="createNewNodeForm" method="post" action="create" controller="Node" package="TYPO3.Neos" subpackage="Service">
+    <f:form.hidden name="referenceNode" value="{referenceNode.contextPath}" />
+    <f:form.hidden name="position" value="{position}" />
+    <f:form.hidden name="nodeData[nodeType]" value="{type}" />
+    <f:form.textfield name="nodeData[properties][title]" />
+    <f:form.submit value="{f:translate(package: 'Psmb.CreateNodeButton', id: 'create')}"/>
+  </f:form>
+
+  <script type="text/javascript">
+    (function() {
+      var endpointUrl = document.querySelector('link[rel="neos-service-node-create"]').getAttribute('href');
+      var form = document.getElementById('createNewNodeForm');
+
+      form.addEventListener('submit', function(event) {
+        fetch(endpointUrl, {
+          method: 'POST',
+          credentials: 'same-origin',
+          body: new FormData(form)
+        }).then(function(response) {
+          return response.json();
+        })
+        .then(function(response) {
+          window.location = response.data.nextUri;
+        });
+        var submitButton = form.querySelector('input[type=submit]');
+        submitButton.disabled = true;
+        submitButton.value = "<f:translate package="Psmb.CreateNodeButton" id="creating"/>";
+        // Prevent form submission
+        event.preventDefault();
+        return false;
+      });
+    }());
+  </script>
+</div>

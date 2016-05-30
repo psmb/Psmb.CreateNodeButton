@@ -7,6 +7,8 @@ and you have to manually select the correct position for the new node, which is 
 This package provides with `Psmb.CreateNodeButton:CreateNodeButton` TypoScript object, which allows you to create nodes
 in a predefined position in one click of a button.
 
+![Demo](https://raw.githubusercontent.com/psmb/Psmb.CreateNodeButton/master/demo.gif)
+
 ## TL;DR
 
 ```

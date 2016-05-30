@@ -1,35 +1,58 @@
-<div{attributes -> f:format.raw()}>
-  <f:form id="createNewNodeForm" method="post" action="create" controller="Node" package="TYPO3.Neos" subpackage="Service">
+<div{attributes -> f:format.raw()} style="margin: 12px 0; padding: 6px; background: gray; display: inline-block; border: 1px dashed white;">
+  <f:form
+    id="createNewNodeForm"
+    method="post"
+    action="create"
+    controller="Node"
+    package="TYPO3.Neos"
+    subpackage="Service"
+    >
     <f:form.hidden name="referenceNode" value="{referenceNode.contextPath}" />
     <f:form.hidden name="position" value="{position}" />
     <f:form.hidden name="nodeData[nodeType]" value="{type}" />
-    <f:form.textfield name="nodeData[properties][title]" />
+    <f:form.textfield name="nodeData[properties][title]" placeholder="{f:translate(package: 'Psmb.CreateNodeButton', id: 'placeholder')}" />
     <f:form.submit value="{f:translate(package: 'Psmb.CreateNodeButton', id: 'create')}"/>
   </f:form>
 
   <script type="text/javascript">
     (function() {
-      var endpointUrl = document.querySelector('link[rel="neos-service-node-create"]').getAttribute('href');
-      var form = document.getElementById('createNewNodeForm');
+      function init() {
+        var endpointUrl = document.querySelector('link[rel="neos-service-node-create"]').getAttribute('href');
+        var form = document.getElementById('createNewNodeForm');
 
-      form.addEventListener('submit', function(event) {
-        fetch(endpointUrl, {
-          method: 'POST',
-          credentials: 'same-origin',
-          body: new FormData(form)
-        }).then(function(response) {
-          return response.json();
-        })
-        .then(function(response) {
-          window.location = response.data.nextUri;
+        form.addEventListener('submit', function(event) {
+          var submitButton = form.querySelector('input[type=submit]');
+          submitButton.disabled = true;
+          submitButton.value = "<f:translate package="Psmb.CreateNodeButton" id="creating"/>";
+
+          var request = new XMLHttpRequest();
+          request.withCredentials = true;
+          request.open('POST', endpointUrl, true);
+
+          request.onload = function() {
+            if (request.status >= 200 && request.status < 400) {
+              var response = JSON.parse(request.responseText);
+              window.location = response.data.nextUri;
+            } else {
+              submitButton.value = "<f:translate package="Psmb.CreateNodeButton" id="error"/>";
+            }
+          };
+          request.onerror = function() {
+            submitButton.value = "<f:translate package="Psmb.CreateNodeButton" id="error"/>";
+          };
+
+          request.send(new FormData(form));
+
+          // Prevent form submission
+          event.preventDefault();
+          return false;
         });
-        var submitButton = form.querySelector('input[type=submit]');
-        submitButton.disabled = true;
-        submitButton.value = "<f:translate package="Psmb.CreateNodeButton" id="creating"/>";
-        // Prevent form submission
-        event.preventDefault();
-        return false;
-      });
+      }
+
+      init();
+      document.addEventListener('Neos.PageLoaded', function(event) {
+        init();
+      }, false);
     }());
   </script>
 </div>

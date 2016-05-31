@@ -1,7 +1,7 @@
 prototype(Psmb.CreateNodeButton:CreateNodeButton) < prototype(TYPO3.TypoScript:Template) {
 	templatePath = 'resource://Psmb.CreateNodeButton/Private/Templates/CreateNodeButton.html'
 	attributes = TYPO3.TypoScript:Attributes {
-		class = 'CreateNodeButton'
+		class = 'CreateNodeButton neos neos-module'
 	}
 	referenceNode = ${node}
 	position = 'after'

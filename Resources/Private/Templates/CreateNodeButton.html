@@ -1,4 +1,4 @@
-<div{attributes -> f:format.raw()} style="margin: 12px 0; padding: 6px; background: gray; display: inline-block; border: 1px dashed white;">
+<div{attributes -> f:format.raw()} style="margin: 12px 0; padding: 6px; display: inline-block">
   <f:form
     id="createNewNodeForm"
     method="post"
@@ -11,7 +11,7 @@
     <f:form.hidden name="position" value="{position}" />
     <f:form.hidden name="nodeData[nodeType]" value="{type}" />
     <f:form.textfield name="nodeData[properties][title]" placeholder="{f:translate(package: 'Psmb.CreateNodeButton', id: 'placeholder')}" />
-    <f:form.submit value="{f:translate(package: 'Psmb.CreateNodeButton', id: 'create')}"/>
+    <f:form.submit class="neos-button" value="{f:translate(package: 'Psmb.CreateNodeButton', id: 'create')}"/>
   </f:form>
 
   <script type="text/javascript">

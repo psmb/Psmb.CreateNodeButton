@@ -3,7 +3,7 @@
     "type": "neos-package",
     "name": "psmb/createnodebutton",
     "require": {
-        "typo3/flow": "*"
+        "typo3/neos": "*"
     },
     "license": "GPL-3.0+",
     "autoload": {

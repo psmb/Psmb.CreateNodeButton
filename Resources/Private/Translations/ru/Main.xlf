@@ -6,6 +6,22 @@
               <source>Title of the new page</source>
               <target>Заголовок новой страницы</target>
             </trans-unit>
+            <trans-unit id="confirm">
+                <source>Are you sure that you want to delete this page?</source>
+                <target>Вы уверены, что хотите удалить эту страницу?</target>
+            </trans-unit>
+            <trans-unit id="delete">
+                <source>Delete</source>
+                <target>Удалить</target>
+            </trans-unit>
+            <trans-unit id="deleting">
+                <source>Deleting...</source>
+                <target>Удаляю...</target>
+            </trans-unit>
+            <trans-unit id="deleteFull">
+                <source>Delete this page</source>
+                <target>Удалить эту страницу</target>
+            </trans-unit>
             <trans-unit id="create">
                 <source>Create</source>
                 <target>Создать</target>

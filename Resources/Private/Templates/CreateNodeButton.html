@@ -1,4 +1,4 @@
-<div{attributes -> f:format.raw()} style="margin: 12px 0; padding: 6px; display: inline-block">
+<div{attributes -> f:format.raw()} style="margin-top: 12px; padding: 6px; display: flex">
   <f:form
     id="createNewNodeForm"
     method="post"
@@ -14,10 +14,23 @@
     <f:form.textfield name="nodeData[properties][title]" placeholder="{f:translate(package: 'Psmb.CreateNodeButton', id: 'placeholder')}" />
     <f:form.submit class="neos-button" value="{f:translate(package: 'Psmb.CreateNodeButton', id: 'create')}"/>
   </f:form>
+  <f:form style="margin-left: auto;"
+    id="deleteNodeForm"
+    method="post"
+    action="delete"
+    controller="Node"
+    package="TYPO3.Neos"
+    subpackage="Service"
+    format="json"
+    >
+    <f:form.hidden name="node" value="{deleteNode.contextPath}" />
+    <f:form.hidden name="position" value="{position}" />
+    <f:form.submit class="neos-button" title="{f:translate(package: 'Psmb.CreateNodeButton', id: 'deleteFull')}" value="{f:translate(package: 'Psmb.CreateNodeButton', id: 'delete')}"/>
+  </f:form>
 
   <script type="text/javascript">
     (function() {
-      function init() {
+      function initCreate() {
         var endpointUrl = document.querySelector('link[rel="neos-service-node-create"]').getAttribute('href');
         var form = document.getElementById('createNewNodeForm');
 
@@ -48,6 +61,46 @@
           event.preventDefault();
           return false;
         });
+      }
+      function initDelete() {
+        var endpointUrl = document.querySelector('link[rel="neos-service-node-delete"]').getAttribute('href');
+        var form = document.getElementById('deleteNodeForm');
+
+        form.addEventListener('submit', function(event) {
+          event.preventDefault();
+          var submitButton = form.querySelector('input[type=submit]');
+          var confirmationText = "<f:translate package="Psmb.CreateNodeButton" id="confirm"/>";
+          if (submitButton.value != confirmationText) {
+            submitButton.value = confirmationText;
+            submitButton.classList.add('neos-button-danger');
+          } else {
+            submitButton.disabled = true;
+            submitButton.value = "<f:translate package="Psmb.CreateNodeButton" id="deleting"/>";
+
+            var request = new XMLHttpRequest();
+            request.withCredentials = true;
+            request.open('POST', endpointUrl, true);
+
+            request.onload = function() {
+              if (request.status >= 200 && request.status < 400) {
+                var response = JSON.parse(request.responseText);
+                window.location = '/neos';
+              } else {
+                submitButton.value = "<f:translate package="Psmb.CreateNodeButton" id="error"/>";
+              }
+            };
+            request.onerror = function() {
+              submitButton.value = "<f:translate package="Psmb.CreateNodeButton" id="error"/>";
+            };
+
+            request.send(new FormData(form));
+          }
+          return false;
+        });
+      }
+      function init() {
+        initCreate();
+        initDelete();
       }
 
       init();

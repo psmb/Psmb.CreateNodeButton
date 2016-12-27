@@ -6,6 +6,6 @@ prototype(Psmb.CreateNodeButton:CreateNodeButton) < prototype(Neos.Fusion:Templa
 	referenceNode = ${node}
 	deleteNode = ${node}
 	position = 'after'
-	type = 'TYPO3.Neos:Page'
+	type = 'Neos.Neos:Page'
 	@if.onlyInBackend = ${node.context.inBackend}
 }

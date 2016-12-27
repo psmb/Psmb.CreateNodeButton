@@ -1,11 +1,11 @@
 
 Neos:
   Neos:
-    typoScript:
-      autoInclude:
-        Psmb.CreateNodeButton: true
     userInterface:
       translation:
         autoInclude:
           Psmb.CreateNodeButton:
             - 'NodeTypes/*'
+    fusion:
+      autoInclude:
+        Psmb.CreateNodeButton: true

@@ -1,6 +1,6 @@
-prototype(Psmb.CreateNodeButton:CreateNodeButton) < prototype(TYPO3.TypoScript:Template) {
+prototype(Psmb.CreateNodeButton:CreateNodeButton) < prototype(Neos.Fusion:Template) {
 	templatePath = 'resource://Psmb.CreateNodeButton/Private/Templates/CreateNodeButton.html'
-	attributes = TYPO3.TypoScript:Attributes {
+	attributes = Neos.Fusion:Attributes {
 		class = 'CreateNodeButton neos neos-module'
 	}
 	referenceNode = ${node}

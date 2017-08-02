@@ -31,9 +31,14 @@ Like this you can modify it to create new nodes inside the `/sites/site/news` no
 createNodeButton = Psmb.CreateNodeButton:CreateNodeButton {
   referenceNode = ${q(site).children('news').get(0)}
   type = 'Your:NodeType'
-  position = 'inside'
+  position = 'into'
 }
 ```
+
+Possible values for the `position` are: `before`, `into` and `after`.
+
+Note: If you use this on the site node with the default position, a new node will be created outside
+the current site. You must use `into` in that case.
 
 Credits for the idea go to [Aske Ertmann](https://twitter.com/AskeErtmann).
 

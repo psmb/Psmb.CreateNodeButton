@@ -31,7 +31,7 @@
   <script type="text/javascript">
     (function() {
       function initCreate() {
-        var endpointUrl = document.querySelector('link[rel="neos-service-node-create"]').getAttribute('href');
+        var endpointUrl = '/neos/service/node/create';
         var form = document.getElementById('createNewNodeForm');
 
         form.addEventListener('submit', function(event) {
@@ -63,7 +63,7 @@
         });
       }
       function initDelete() {
-        var endpointUrl = document.querySelector('link[rel="neos-service-node-delete"]').getAttribute('href');
+        var endpointUrl = '/neos/service/node/delete';
         var form = document.getElementById('deleteNodeForm');
 
         form.addEventListener('submit', function(event) {

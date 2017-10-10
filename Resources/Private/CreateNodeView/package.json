@@ -1,0 +1,15 @@
+{
+  "description": "CreateNodeView",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "build": "neos-react-scripts build",
+    "watch": "neos-react-scripts watch"
+  },
+  "devDependencies": {
+    "@neos-project/neos-ui-extensibility": "@dev"
+  },
+  "neos": {
+    "buildTargetDirectory": "../../Public/JavaScript/CreateNodeView"
+  }
+}

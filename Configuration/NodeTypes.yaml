@@ -1,0 +1,23 @@
+'Psmb.CreateNodeButton:CreateNodeMixin':
+  abstract: true
+  ui:
+    inspector:
+      tabs:
+        createNode:
+          label: i18n
+          position: 100
+          icon: plus-circle
+      groups:
+        createNode:
+          label: i18n
+          tab: createNode
+      views:
+        createNode:
+          label: i18n
+          group: createNode
+          view: Psmb.CreateNodeButton/Views/CreateNodeView
+          viewOptions:
+            type: 'Sfi.Site:News'
+            referenceNodePath: '/sites/site/a'
+            position: 'into'
+

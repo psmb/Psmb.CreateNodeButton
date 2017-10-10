@@ -17,7 +17,7 @@
           group: createNode
           view: Psmb.CreateNodeButton/Views/CreateNodeView
           viewOptions:
-            type: 'Sfi.Site:News'
-            referenceNodePath: '/sites/site/a'
             position: 'into'
+            # type: 'Set.Your:DocumentNodeType'
+            # referenceNodePath: '/sites/site/to-set'
 

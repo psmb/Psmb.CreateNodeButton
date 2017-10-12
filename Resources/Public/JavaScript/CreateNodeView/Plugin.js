@@ -65,8 +65,10 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	(0, _neosUiExtensibility2.default)('Psmb.CreateNodeButton:CreateNodeView', {}, function (globalRegistry) {
-	    var viewsRegistry = globalRegistry.get('inspector').get('views');
+	    var containerRegistry = globalRegistry.get('containers');
+	    containerRegistry.set('PrimaryToolbar/Left/CreateNode', _CreateNodeView.CreateNodeContainer, 'after PrimaryToolbar/Left/EditModePanelToggler');
 	
+	    var viewsRegistry = globalRegistry.get('inspector').get('views');
 	    viewsRegistry.set('Psmb.CreateNodeButton/Views/CreateNodeView', {
 	        component: _CreateNodeView2.default
 	    });
@@ -195,7 +197,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
-	exports.default = undefined;
+	exports.CreateNodeContainer = exports.default = undefined;
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
@@ -205,19 +207,19 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _propTypes = __webpack_require__(14);
+	var _propTypes = __webpack_require__(9);
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _plowJs = __webpack_require__(13);
+	var _plowJs = __webpack_require__(10);
 	
-	var _reactUiComponents = __webpack_require__(9);
+	var _reactUiComponents = __webpack_require__(11);
 	
-	var _reactRedux = __webpack_require__(10);
+	var _reactRedux = __webpack_require__(12);
 	
-	var _neosUiReduxStore = __webpack_require__(11);
+	var _neosUiReduxStore = __webpack_require__(13);
 	
-	var _neosUiDecorators = __webpack_require__(12);
+	var _neosUiDecorators = __webpack_require__(14);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -229,7 +231,8 @@
 	
 	var CreateNodeView = (_dec = (0, _neosUiDecorators.neos)(function (globalRegistry) {
 	    return {
-	        i18nRegistry: globalRegistry.get('i18n')
+	        i18nRegistry: globalRegistry.get('i18n'),
+	        options: globalRegistry.get('frontendConfiguration').get('Psmb.CreateNodeButton')
 	    };
 	}), _dec2 = (0, _reactRedux.connect)((0, _plowJs.$transform)({
 	    siteNodeContextPath: (0, _plowJs.$get)('cr.nodes.siteNode')
@@ -274,23 +277,29 @@
 	        value: function render() {
 	            var _this2 = this;
 	
-	            return _react2.default.createElement(
+	            var placeholder = this.props.options.placeholder || '';
+	            return this.props.options.enabled ? _react2.default.createElement(
 	                'div',
-	                { style: { display: 'flex' } },
-	                _react2.default.createElement(_reactUiComponents.TextInput, {
-	                    onChange: function onChange(title) {
-	                        return _this2.setState({ title: title });
-	                    },
-	                    value: this.state.title
-	                }),
+	                { style: { display: 'inline-block' } },
 	                _react2.default.createElement(
-	                    _reactUiComponents.Button,
-	                    { style: 'brand', onClick: function onClick() {
-	                            return _this2.createNode();
-	                        } },
-	                    this.props.i18nRegistry.translate('Psmb.CreateNodeButton:Main:create')
+	                    'div',
+	                    { style: { display: 'flex' } },
+	                    _react2.default.createElement(_reactUiComponents.TextInput, {
+	                        onChange: function onChange(title) {
+	                            return _this2.setState({ title: title });
+	                        },
+	                        value: this.state.title,
+	                        placeholder: placeholder
+	                    }),
+	                    _react2.default.createElement(
+	                        _reactUiComponents.Button,
+	                        { style: 'lighter', onClick: function onClick() {
+	                                return _this2.createNode();
+	                            } },
+	                        this.props.i18nRegistry.translate('Psmb.CreateNodeButton:Main:create')
+	                    )
 	                )
-	            );
+	            ) : null;
 	        }
 	    }]);
 	
@@ -300,11 +309,17 @@
 	    options: _propTypes2.default.shape({
 	        type: _propTypes2.default.string.isRequired,
 	        position: _propTypes2.default.string.isRequired,
-	        referenceNodePath: _propTypes2.default.string.isRequired
+	        referenceNodePath: _propTypes2.default.string.isRequired,
+	        placeholder: _propTypes2.default.string.isRequired
 	    }),
 	    persistChanges: _propTypes2.default.func.isRequired
 	}, _temp2)) || _class) || _class);
 	exports.default = CreateNodeView;
+	var CreateNodeContainer = exports.CreateNodeContainer = (0, _neosUiDecorators.neos)(function (globalRegistry) {
+	    return {
+	        options: globalRegistry.get('frontendConfiguration').get('Psmb.CreateNodeButton')
+	    };
+	})(CreateNodeView);
 
 /***/ }),
 /* 8 */
@@ -332,7 +347,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	module.exports = (0, _readFromConsumerApi2.default)('NeosProjectPackages')().ReactUiComponents;
+	module.exports = (0, _readFromConsumerApi2.default)('vendor')().PropTypes;
 
 /***/ }),
 /* 10 */
@@ -346,7 +361,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	module.exports = (0, _readFromConsumerApi2.default)('vendor')().reactRedux;
+	module.exports = (0, _readFromConsumerApi2.default)('vendor')().plow;
 
 /***/ }),
 /* 11 */
@@ -360,7 +375,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	module.exports = (0, _readFromConsumerApi2.default)('NeosProjectPackages')().NeosUiReduxStore;
+	module.exports = (0, _readFromConsumerApi2.default)('NeosProjectPackages')().ReactUiComponents;
 
 /***/ }),
 /* 12 */
@@ -374,7 +389,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	module.exports = (0, _readFromConsumerApi2.default)('NeosProjectPackages')().NeosUiDecorators;
+	module.exports = (0, _readFromConsumerApi2.default)('vendor')().reactRedux;
 
 /***/ }),
 /* 13 */
@@ -388,7 +403,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	module.exports = (0, _readFromConsumerApi2.default)('vendor')().plow;
+	module.exports = (0, _readFromConsumerApi2.default)('NeosProjectPackages')().NeosUiReduxStore;
 
 /***/ }),
 /* 14 */
@@ -402,7 +417,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	module.exports = (0, _readFromConsumerApi2.default)('vendor')().PropTypes;
+	module.exports = (0, _readFromConsumerApi2.default)('NeosProjectPackages')().NeosUiDecorators;
 
 /***/ })
 /******/ ]);

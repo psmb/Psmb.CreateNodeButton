@@ -7,7 +7,8 @@ import {selectors, actions} from '@neos-project/neos-ui-redux-store';
 import {neos} from '@neos-project/neos-ui-decorators';
 
 @neos(globalRegistry => ({
-    i18nRegistry: globalRegistry.get('i18n')
+    i18nRegistry: globalRegistry.get('i18n'),
+    options: globalRegistry.get('frontendConfiguration').get('Psmb.CreateNodeButton')
 }))
 @connect($transform({
     siteNodeContextPath: $get('cr.nodes.siteNode')
@@ -21,7 +22,8 @@ export default class CreateNodeView extends Component {
         options: PropTypes.shape({
             type: PropTypes.string.isRequired,
             position: PropTypes.string.isRequired,
-            referenceNodePath: PropTypes.string.isRequired
+            referenceNodePath: PropTypes.string.isRequired,
+            placeholder: PropTypes.string.isRequired
         }),
         persistChanges: PropTypes.func.isRequired
     };
@@ -48,14 +50,22 @@ export default class CreateNodeView extends Component {
     }
 
     render() {
-        return (
-            <div style={{display: 'flex'}}>
-                <TextInput
-                    onChange={title => this.setState({title})}
-                    value={this.state.title}
-                    />
-                <Button style="brand" onClick={() => this.createNode()}>{this.props.i18nRegistry.translate('Psmb.CreateNodeButton:Main:create')}</Button>
+        const placeholder = this.props.options.placeholder || '';
+        return this.props.options.enabled ? (
+            <div style={{display: 'inline-block'}}>
+                <div style={{display: 'flex'}}>
+                    <TextInput
+                        onChange={title => this.setState({title})}
+                        value={this.state.title}
+                        placeholder={placeholder}
+                        />
+                    <Button style="lighter" onClick={() => this.createNode()}>{this.props.i18nRegistry.translate('Psmb.CreateNodeButton:Main:create')}</Button>
+                </div>
             </div>
-        );
+        ) : null;
     }
 }
+
+export const CreateNodeContainer = neos(globalRegistry => ({
+    options: globalRegistry.get('frontendConfiguration').get('Psmb.CreateNodeButton')
+}))(CreateNodeView);

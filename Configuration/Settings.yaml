@@ -14,3 +14,11 @@ Neos:
         javascript:
           'Psmb.CreateNodeButton:CreateNodeView':
             resource: resource://Psmb.CreateNodeButton/Public/JavaScript/CreateNodeView/Plugin.js
+      frontendConfiguration:
+        'Psmb.CreateNodeButton':
+          enabled: false
+          # Possible values are `before`, `into` and `after`
+          position: 'into'
+          # type: 'Set.Your:DocumentNodeType'
+          # referenceNodePath: '/sites/site/to-set'
+          placeholder: 'Enter title...'

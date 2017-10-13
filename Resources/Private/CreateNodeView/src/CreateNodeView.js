@@ -7,8 +7,7 @@ import {selectors, actions} from '@neos-project/neos-ui-redux-store';
 import {neos} from '@neos-project/neos-ui-decorators';
 
 @neos(globalRegistry => ({
-    i18nRegistry: globalRegistry.get('i18n'),
-    options: globalRegistry.get('frontendConfiguration').get('Psmb.CreateNodeButton')
+    i18nRegistry: globalRegistry.get('i18n')
 }))
 @connect($transform({
     siteNodeContextPath: $get('cr.nodes.siteNode')

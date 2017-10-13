@@ -231,8 +231,7 @@
 	
 	var CreateNodeView = (_dec = (0, _neosUiDecorators.neos)(function (globalRegistry) {
 	    return {
-	        i18nRegistry: globalRegistry.get('i18n'),
-	        options: globalRegistry.get('frontendConfiguration').get('Psmb.CreateNodeButton')
+	        i18nRegistry: globalRegistry.get('i18n')
 	    };
 	}), _dec2 = (0, _reactRedux.connect)((0, _plowJs.$transform)({
 	    siteNodeContextPath: (0, _plowJs.$get)('cr.nodes.siteNode')

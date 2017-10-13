@@ -236,7 +236,8 @@
 	}), _dec2 = (0, _reactRedux.connect)((0, _plowJs.$transform)({
 	    siteNodeContextPath: (0, _plowJs.$get)('cr.nodes.siteNode')
 	}), {
-	    persistChanges: _neosUiReduxStore.actions.Changes.persistChanges
+	    persistChanges: _neosUiReduxStore.actions.Changes.persistChanges,
+	    startLoading: _neosUiReduxStore.actions.UI.ContentCanvas.startLoading
 	}), _dec(_class = _dec2(_class = (_temp2 = _class2 = function (_Component) {
 	    _inherits(CreateNodeView, _Component);
 	
@@ -268,6 +269,8 @@
 	                    data: data
 	                }
 	            }]);
+	            _this.setState({ title: '' });
+	            _this.props.startLoading();
 	        }, _temp), _possibleConstructorReturn(_this, _ret);
 	    }
 	
@@ -288,7 +291,10 @@
 	                            return _this2.setState({ title: title });
 	                        },
 	                        value: this.state.title,
-	                        placeholder: placeholder
+	                        placeholder: placeholder,
+	                        onEnterKey: function onEnterKey() {
+	                            return _this2.createNode();
+	                        }
 	                    }),
 	                    _react2.default.createElement(
 	                        _reactUiComponents.Button,
@@ -311,7 +317,8 @@
 	        referenceNodePath: _propTypes2.default.string.isRequired,
 	        placeholder: _propTypes2.default.string.isRequired
 	    }),
-	    persistChanges: _propTypes2.default.func.isRequired
+	    persistChanges: _propTypes2.default.func.isRequired,
+	    startLoading: _propTypes2.default.func.isRequired
 	}, _temp2)) || _class) || _class);
 	exports.default = CreateNodeView;
 	var CreateNodeContainer = exports.CreateNodeContainer = (0, _neosUiDecorators.neos)(function (globalRegistry) {

@@ -12,7 +12,8 @@ import {neos} from '@neos-project/neos-ui-decorators';
 @connect($transform({
     siteNodeContextPath: $get('cr.nodes.siteNode')
 }), {
-    persistChanges: actions.Changes.persistChanges
+    persistChanges: actions.Changes.persistChanges,
+    startLoading: actions.UI.ContentCanvas.startLoading,
 })
 export default class CreateNodeView extends Component {
 
@@ -24,7 +25,8 @@ export default class CreateNodeView extends Component {
             referenceNodePath: PropTypes.string.isRequired,
             placeholder: PropTypes.string.isRequired
         }),
-        persistChanges: PropTypes.func.isRequired
+        persistChanges: PropTypes.func.isRequired,
+        startLoading: PropTypes.func.isRequired
     };
 
     state = {
@@ -45,7 +47,9 @@ export default class CreateNodeView extends Component {
                 nodeType,
                 data
             }
-        }])
+        }]);
+        this.setState({title: ''});
+        this.props.startLoading();
     }
 
     render() {
@@ -57,6 +61,7 @@ export default class CreateNodeView extends Component {
                         onChange={title => this.setState({title})}
                         value={this.state.title}
                         placeholder={placeholder}
+                        onEnterKey={() => this.createNode()}
                         />
                     <Button style="lighter" onClick={() => this.createNode()}>{this.props.i18nRegistry.translate('Psmb.CreateNodeButton:Main:create')}</Button>
                 </div>

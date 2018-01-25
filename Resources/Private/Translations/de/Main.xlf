@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file original="" source-language="en" target-language="ru" datatype="plaintext">
+        <body>
+            <trans-unit id="placeholder">
+              <source>Title of the new page</source>
+              <target>Titel der neuen Seite</target>
+            </trans-unit>
+            <trans-unit id="confirm">
+                <source>Are you sure that you want to delete this page?</source>
+                <target>Sind Sie sicher, dass Sie diese Seite löschen wollen?</target>
+            </trans-unit>
+            <trans-unit id="delete">
+                <source>Delete</source>
+                <target>Löschen</target>
+            </trans-unit>
+            <trans-unit id="deleting">
+                <source>Deleting...</source>
+                <target>Wird gelöscht...</target>
+            </trans-unit>
+            <trans-unit id="deleteFull">
+                <source>Delete this page</source>
+                <target>Diese Seite löschen</target>
+            </trans-unit>
+            <trans-unit id="create">
+                <source>Create</source>
+                <target>Erstellen</target>
+            </trans-unit>
+            <trans-unit id="creating">
+                <source>Creating...</source>
+                <target>Wird erstellt...</target>
+            </trans-unit>
+            <trans-unit id="error">
+                <source>Error!</source>
+                <target>Fehler!</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

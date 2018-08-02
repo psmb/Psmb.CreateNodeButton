@@ -17,8 +17,10 @@
           group: createNode
           view: Psmb.CreateNodeButton/Views/CreateNodeView
           viewOptions:
+            enabled: true
             # Possible values are `before`, `into` and `after`
             position: 'into'
             # type: 'Set.Your:DocumentNodeType'
             # referenceNodePath: '/sites/site/to-set'
+            # placeholder: 'Enter title...'
 
